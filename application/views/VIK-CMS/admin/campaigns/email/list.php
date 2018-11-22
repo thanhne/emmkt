@@ -27,12 +27,12 @@
                                     <th class="text-center" rowspan="1" colspan="1" style="width: 5%;">
                                         <input type="checkbox" name="checks[]" />
                                     </th>
-                                    <th rowspan="1" colspan="1" style="width: 30%;">Campaigns</th>
+                                    <th rowspan="1" colspan="1" style="width: 42%;">Campaigns</th>
                                     <th rowspan="1" colspan="1" style="width: 5%;">Status</th>
-                                    <th rowspan="1" colspan="1" style="width: 15%;">Recipients</th>
-                                    <th rowspan="1" colspan="1" style="width: 15%;">Openers</th>
-                                    <th rowspan="1" colspan="1" style="width: 15%;">Clickers</th>
-                                    <th rowspan="1" colspan="1" style="width: 15%;">Unsub</th>
+                                    <th rowspan="1" colspan="1" style="width: 12%;">Recipients</th>
+                                    <th rowspan="1" colspan="1" style="width: 12%;">Openers</th>
+                                    <th rowspan="1" colspan="1" style="width: 12%;">Clickers</th>
+                                    <th rowspan="1" colspan="1" style="width: 12%;">Unsub</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,25 @@
                                 ?>
                                             <tr class="gradeA odd" role="row">
                                                 <td class="text-center"><input type="checkbox" name="checks[]" /></td>
-                                                <td><a href="#"><?php echo $item->name ?></a></td>
+                                                <td camp="id">
+                                                    <p>
+                                                        <a href="#"><?php echo $item->name ?></a>
+                                                        <br />
+                                                         <span class="text-muted"><?php echo '#'.$item->id ?> <strong>sent</strong> On 21 Nov 2018, 06:32 PM</span>
+                                                    </p>
+                                                   
+                                                    <p class="start-stop">                                                        
+                                                        <a camp_id="<?php echo $item->id ?>" class="btn btn-success btn-xs">Start</a>
+                                                        <!-- <a class="btn btn-danger btn-xs">Stop</a> -->
+                                                    </p>
+                                                    <!-- <p> 
+                                                        <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-success btn-xs">Report</a>
+                                                        <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-primary btn-xs">Preview</a>
+                                                        <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-success btn-xs">Edit</a>
+                                                        <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-success btn-xs">Send a test</a>
+                                                        <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-success btn-xs">Duplicate</a>
+                                                    </p> -->
+                                                </td>
                                                 <td class="text-center"><?php echo is_status($item->status) ?></td>
 												<td>
 													<p><b>16,423</b></p>

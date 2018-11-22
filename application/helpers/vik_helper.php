@@ -169,6 +169,20 @@ if ( !function_exists( 'show_status_process' ) ) {
 	}
 }
 
+if( !function_exists( 'is_start' ) ) {
+	function is_start($status) {
+		if ($status == 3) {
+			echo '<button class="btn btn-warning btn-xs">Done</button>';
+		}else {
+			if ($status == 2) {
+				echo '<button class="btn btn-danger stop">Stop</button>';
+			}else {
+				echo '<button class="btn btn-success start">Start</button>';
+			}
+		}
+	}
+}
+
 if ( !function_exists( 'total_contacts_by_groups' ) ) {
 	function total_contacts_by_group_id($group_id) {
 		global $CI;

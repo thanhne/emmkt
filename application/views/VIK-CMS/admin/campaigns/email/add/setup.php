@@ -51,6 +51,9 @@
                             <input class="form-control" type="text" id="fromname" name="txtFromName" value="<?php echo set_value('txtFromName', isset($_setup['txtFromName']) ? $_setup['txtFromName'] : '') ?>" placeholder="Please enter the From Name of campaign" />
                             <p class="help-block">Enter the email address where you want to receive replies from your contacts.</p>
                         </div>
+                        
+                    </div>
+                    <div class="col-lg-6">
                         <div class="form-group">
                             <label>Custom_reply to mail</label>
                             <input class="form-control" type="text" id="replyemail" name="txtReplyEmail" value="<?php echo set_value('txtReplyEmail', isset($_setup['txtReplyEmail']) ? $_setup['txtReplyEmail'] : '') ?>" placeholder="Please enter the Custom Email for Reply of campaign" />

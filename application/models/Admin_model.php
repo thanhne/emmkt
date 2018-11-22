@@ -139,6 +139,45 @@ class Admin_model extends CI_Model{
 		}
 	}
 	/**
+	 * [campaign_update description]
+	 * @param  [type] $id     [description]
+	 * @param  array  $inputs [description]
+	 * @return [type]         [description]
+	 */
+	public function campaign_update($id,$inputs = []) {
+		$default = [
+			'name'          => '',
+			'subject'       => '',
+			'email_id'      => '',
+			'from_mail'     => '',
+			'from_name'     => '',
+			'custom_reply'  => '',
+			'template_id'   => '',
+			'status'   		=> '',
+		];
+		$outputs = array_merge($default,$inputs);
+
+		if (count($outputs) == 8 && $id && is_numeric($id)) {
+			$this->db->where('id', $id);
+			return $this->db->update('campaigns', $outputs);
+		}
+		return false;
+	}
+
+	public function campaign_update_status($id,$status) {
+		$status = isset($status) ? $status : 1;
+		$outputs = [
+			'status'   		=> $status,
+		];
+		//$outputs = array_merge($default,$inputs);
+
+		if (count($outputs) == 1 && is_numeric($id)) {
+			$this->db->where('id', $id);
+			return $this->db->update('campaigns', $outputs);
+		}
+		return false;
+	}
+	/**
 	 * [campaign_delete description]
 	 * @author VIK thanhne.com
 	 * @param  [type] $id [description]

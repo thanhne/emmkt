@@ -17,26 +17,18 @@ class Cronjob extends CI_Controller {
 			}
 		}
 	}
-/*
-	public function getCampaign_Contact($camp_id) {
-
-	}*/
 
 	public function doAjob($camp_id) {
 		//$camp_id = 3;
 		$errors = [];
 		$campaign = $this->admin_model->campaign_find($camp_id);
+		$this->sendmail->mailConfig($this->config->item('email_service'));
 		if (!$campaign) {
 			$errors[] = 'campaign';
 		}
 
 		$status = isset($campaign['status']) ? $campaign['status'] : 1;
-		/**
-		 * status = 1; //disable
-		 * status = 2; //active
-		 * status = 3; //done
-		 */
-		if ($status != 1) {
+		if ($status != 1) { // = 1; //disable |  = 2; //active |  = 3; //done
 			return;
 		}
 		//1. Subject
@@ -70,53 +62,23 @@ class Cronjob extends CI_Controller {
 		//5. Reply
 		$Reply = isset($campaign['custom_reply']) ? $campaign['custom_reply'] : '';
 
-		$mailConfig = $this->admin_model->configuration_find(1);
-
-		if (isset($mailConfig['mail_protocol']) && !empty($mailConfig['mail_protocol'])) {
-			$mailprotocol = trim($mailConfig['mail_protocol']);
-		}else {
-			$errors[] = 'mail_protocol';
-		}
-
-		if (isset($mailConfig['mail_host']) && !empty($mailConfig['mail_host'])) {
-			$mailhost = trim($mailConfig['mail_port']);
-		}else {
-			$errors[] = 'mail_host';
-		}
-
-		if (isset($mailConfig['mail_port']) && !empty($mailConfig['mail_port'])) {
-			$mailport = trim($mailConfig['mail_port']);
-		}else {
-			$errors[] = 'mail_port';
-		}
-
-		if (isset($mailConfig['mail_user']) && !empty($mailConfig['mail_user'])) {
-			$mailuser = trim($mailConfig['mail_user']);
-		}else {
-			$errors[] = 'mail_user';
-		}
-
-		if (isset($mailConfig['mail_password']) && !empty($mailConfig['mail_password'])) {
-			$mailpass = trim($mailConfig['mail_password']);
-		}else {
-			$errors[] = 'mail_password';
-		}
-
 		if (count($errors) > 0) {
 			return;
 		}
 
 		$group_ids = $this->admin_model->relationships_find_group_bycamp($camp_id);
 		$contact_ids = $this->admin_model->relationships_find_contact_bygroup($group_ids);
-		$total_send = count($contact_ids);
 
-		if ($total_send > 50) {
+		if (count($contact_ids) > 50) {
 			$contact_ids = $this->admin_model->relationships_find_contact_bygroup($group_ids,50);
 		}
 
-		$this->load->library('Sendmail');
-		//mailConfig($ptcol,$host,$port,$user,$pass,$timeout = 30)
-		$this->sendmail->mailConfig($mailprotocol,$mailhost,$mailport,$mailuser,$mailpass);
+		print_r($contact_ids);
+
+		/*for ($i=0; $i < ; $i++) { 
+			# code...
+		}
+
 		foreach ($contact_ids as $c_id) {
 			if (!$this->admin_model->is_received($camp_id,$c_id)) {
 				$tomail = trim($this->admin_model->contact_get_mail($c_id));
@@ -127,11 +89,11 @@ class Cronjob extends CI_Controller {
 				$this->sendmail->setMail($from_mail,$from_name,$tomail,$subject,$message,$Reply);
 				if ($this->sendmail->Sender()) {
 					$this->admin_model->transactions_insert($camp_id,$c_id,1);
-				}else {
+				}/*else {
 					$this->admin_model->transactions_insert($camp_id,$c_id,2); //2 == fail
 				}
 			}
-		}
+		}*/
 	}
 
 	public function doJobs() {

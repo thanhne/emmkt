@@ -12,17 +12,23 @@ class Sendmail{
 		$this->CI->load->library('encrypt');
 	}
 
-	public function mailConfig($ptcol,$host,$port,$user,$pass,$timeout = 30) {
+	public function mailConfig($config_input = []) {
 		$config = [
-		 	'protocol'  => isset($ptcol) ? $ptcol : 'smtp',
-		    'smtp_host' => isset($host) ? $host : 'ssl://smtp.gmail.com',
-		    'smtp_port' => isset($port) ? $port : 465,
-		    'smtp_user' => isset($user) ? $user : '',
-		    'smtp_pass' => isset($pass) ? $pass : '',
+		 	'protocol'  => 'smtp',
+		    'smtp_host' => 'ssl://smtp.gmail.com',
+		    'smtp_port' => 465,
+		    'smtp_user' => '',
+		    'smtp_pass' => '',
 		    'mailtype'  => 'html',
 		    'charset'   => 'utf-8',
 		    'smtp_timeout'	=> $timeout
 		];
+
+		$output = array_merge($config,$config_input);
+
+		if (count($output) != 8 ) {
+			return false;
+		}
 
 		$this->CI->email->initialize($config);
 		$this->CI->email->set_mailtype("html");
@@ -50,20 +56,7 @@ class Sendmail{
 	}
 
 	public function Sender () {
-		$config = [
-		 	'protocol'  => 'smtp',
-		    'smtp_host' => 'ssl://smtp.gmail.com',
-		    'smtp_port' => 465,
-		    'smtp_user' => 'thanhnb@bestprice.vn',
-		    'smtp_pass' => 'Congty123!@#',
-		    'mailtype'  => 'html',
-		    'charset'   => 'utf-8',
-		    'smtp_timeout'	=> 30
-		];
-
-		$this->CI->email->initialize($config);
-		$this->CI->email->set_mailtype("html");
-		$this->CI->email->set_newline("\r\n");
+		$this->mailConfig();
 
 		$this->CI->email->from($this->mailFrom,$this->mailName);
 		$this->CI->email->to($this->mailTo);

@@ -1,0 +1,14 @@
+Các chức năng đang phát triển, updating...
+ - Validate Email verify or unverify
+ - Tracker ( Kiểm tra client Opener, clicker, recipients, Unsubcribe)
+Xuất ra sơ đồ báo cao.
+ - Preview message template trên 3 giao diện Desktop, mobile, ipad
+ - Membership (Tạo tài khoản, cấp quyền cho từng user)
+ - Import data mail với file cvs or txt từ xa thông qua API
+ - Sơ đồ quản lý dach sách campaign (Sent, Draft, Schedule, Suspended)
+ - Sent A test (Gửi thử 1 email tới một email nhất định )
+ - Gọi tên hoặc email khách hàng trong nội dung email
+ - Thao tác, xóa và edit nhiều item cùng lúc
+ - kết nối với API của sendinblue
+ - Tối ưu hóa gửi mail.
+ - Tính toán phướng án gửi mail

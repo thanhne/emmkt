@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 $route = [
 	/**
 	 * Route for dashboard URl
@@ -19,7 +20,7 @@ $route = [
 	'admin/campaign/email/add/(:any)' => 	'Admin/campaign/email_add/$1',
 	'admin/campaign/email/edit'       => 	'Admin/campaign/email_edit',
 	'admin/campaign/email/delete'     => 	'Admin/campaign/email_delete',
-	'admin/campaign/email/email_send' => 	'Admin/campaign/email_post_send',
+	'admin/campaign/email/ajax' 	  => 	'Admin/campaign/email_ajax',
 
 	/*
 	 * Router for campaign template 
@@ -69,15 +70,17 @@ $route = [
 	 */
 	'admin/setting/get_secret_key'  => 	'Admin/Configuration/generating_secret_key',
 	'admin/setting'   				=> 	'Admin/Configuration/index',
-	'api/(:any)'   					=> 	'VIK_Api/index/$1',
+	'api/(:any)'   					=> 	'Apicontroller/index/$1',
 
 	/**
 	 * Route for default
 	 */
 	'admin/(:any)'    => 'Admin/main/home',
-	'test'			  => 'VIK_Api/test',
+	'test'			  => 'Apicontroller/test',
 	'upload'		  => 'Upload/index'
 ];
+
+
 
 $route['default_controller'] = "home";
 $route['404_override']         = 'Admin/main/index';

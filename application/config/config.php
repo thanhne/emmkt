@@ -25,6 +25,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://mail.web';
 
+//
+$config['email_service'] = [
+	'PROTOCOL'  => 'smtp',
+    'SMTP_HOST' => 'ssl://smtp.gmail.com',
+    'SMTP_PORT' => 465,
+    'SMTP_USER' => 'thanhnb@bestprice.vn',
+    'SMTP_PASS' => 'Congty123!@#',
+    'smtp_timeout'	=> 30
+];
+
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -224,7 +234,7 @@ $config['log_threshold'] = 1;
 | application/logs/ directory. Use a full server path.
 |
 */
-$config['log_path'] = FCPATH.'depot/logs/';
+$config['log_path'] = FCPATH.'vik/depot/logs/';
 
 /*
 |--------------------------------------------------------------------------
@@ -370,7 +380,7 @@ $config['encryption_key'] = '';
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
 $config['sess_expiration'] = 7200;
-$config['sess_save_path'] = FCPATH.'depot/ci_session/';
+$config['sess_save_path'] = FCPATH.'vik/depot/ci_session/';
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;

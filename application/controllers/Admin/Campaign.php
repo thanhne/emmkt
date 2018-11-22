@@ -14,6 +14,25 @@ class Campaign extends CI_Controller {
 		$this->load->library('session');
 		$this->load->model('admin_model');
 	}
+
+	public function email_ajax() {
+		if ($this->input->post('run_campaign')) {
+			$id    	= $this->input->post('campaign_id');
+			$status = $this->input->post('status');
+
+			if (is_numeric($id)) {
+				$status = $this->input->post('status');
+				if ($this->admin_model->campaign_update_status($id,$status)) {
+					return true;
+				}else {
+					return false;
+				}
+			}else {
+				return false;
+			}
+		}
+	}
+
 	/**
 	 * [email_home description]
 	 * @author VIK thanhne.com
@@ -419,7 +438,7 @@ class Campaign extends CI_Controller {
 		//$this->load->view('VIK-CMS/admin/campaigns/email/edit');
 	}
 
-	public function email_delete(){
+	/*public function email_delete(){
 		//$this->load->view('VIK-CMS/admin/campaigns/email/delete');
-	}
+	}*/
 }
