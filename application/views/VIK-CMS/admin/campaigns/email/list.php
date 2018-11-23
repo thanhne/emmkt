@@ -49,9 +49,14 @@
                                                          <span class="text-muted"><?php echo '#'.$item->id ?> <strong>sent</strong> On 21 Nov 2018, 06:32 PM</span>
                                                     </p>
                                                    
-                                                    <p class="start-stop">                                                        
-                                                        <a camp_id="<?php echo $item->id ?>" class="btn btn-success btn-xs">Start</a>
-                                                        <!-- <a class="btn btn-danger btn-xs">Stop</a> -->
+                                                    <p class="start-stop tooltip-demo">
+                                                        <?php 
+                                                            if ($item->status == 1) {
+                                                                echo '<a camp_id="'.$item->id.'" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="Click to start this campaign">Start</a>';
+                                                            }else if($item->status == 2) {
+                                                                echo '<a camp_id="'.$item->id.'" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="right" title="" data-original-title="Click to stop this campaign">Stop</a>';
+                                                            }
+                                                        ?>
                                                     </p>
                                                     <!-- <p> 
                                                         <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-success btn-xs">Report</a>
@@ -61,7 +66,7 @@
                                                         <a href="/admin/contact/edit/<?php echo $item->id ?>/" class="btn btn-outline btn-success btn-xs">Duplicate</a>
                                                     </p> -->
                                                 </td>
-                                                <td class="text-center"><?php echo is_status($item->status) ?></td>
+                                                <td class="text-center"><?php camp_status($item->status) ?></td>
 												<td>
 													<p><b>16,423</b></p>
 													<p>100%</p>

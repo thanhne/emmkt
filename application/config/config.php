@@ -27,11 +27,11 @@ $config['base_url'] = 'http://mail.web';
 
 //
 $config['email_service'] = [
-	'PROTOCOL'  => 'smtp',
-    'SMTP_HOST' => 'ssl://smtp.gmail.com',
-    'SMTP_PORT' => 465,
-    'SMTP_USER' => 'thanhnb@bestprice.vn',
-    'SMTP_PASS' => 'Congty123!@#',
+	'protocol'  => 'smtp',
+    'smtp_host' => 'ssl://smtp.gmail.com',
+    'smtp_port' => 465,
+    'smtp_user' => 'thanhnb@bestprice.vn',
+    'smtp_pass' => 'Congty123!@#',
     'smtp_timeout'	=> 30
 ];
 
@@ -293,7 +293,7 @@ $config['error_views_path'] = '';
 | application/cache/ directory.  Use a full server path.
 |
 */
-$config['cache_path'] = '';
+$config['cache_path'] = FCPATH.'vik/cache/campaigns/';
 
 /*
 |--------------------------------------------------------------------------

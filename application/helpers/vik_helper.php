@@ -3,6 +3,30 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $CI = get_instance();
 
+if ( !function_exists( 'base64UrlEncode' ) ) {
+	function base64UrlEncode($data){
+	  	return strtr(rtrim(base64_encode($data), '='), '+/', '-_');
+	}
+}
+
+if ( !function_exists( 'base64UrlDecode' ) ) {
+	function base64UrlDecode($base64){
+	  	return base64_decode(strtr($base64, '-_', '+/'));
+	}
+}
+
+if ( !function_exists('encode_email') ) {
+	function encode_email($email) {
+		return strrev(base64UrlEncode(strrev(base64UrlEncode($email))));
+	}
+}
+
+if ( !function_exists('decode_email') ) {
+	function decode_email($code) {
+		return base64UrlDecode(strrev(base64UrlDecode(strrev($code))));
+	}
+}
+
 if ( !function_exists( 'dd' ) ) {
 	/**
 	 * [dd print_r or var_dump with style ]
@@ -225,14 +249,25 @@ if ( ! function_exists( 'show_flashdata' ) ) {
 
 if ( !function_exists( 'is_status' ) ) {
 	function is_status($value = 1) {
-		if (!empty($value)) {
-			if ($value == 1) {
-				return '<span class="btn btn-success btn-xs">Active</span>';
+		if ($value == 1) {
+			return '<span class="btn btn-success btn-xs">Active</span>';
+		}else {
+			return '<span class="btn btn-danger btn-xs">Disable</span>';
+		}
+	}
+}
+
+if ( !function_exists( 'camp_status' ) ) {
+	function camp_status($value = 1) {
+		if ($value == 3) {
+			echo '<span class="btn btn-warning btn-xs">Done</span>';
+		}else {
+			if($value == 2) {
+				echo '<span class="btn btn-primary btn-xs camp-status">Sending..</span>';
 			}else {
-				return '<span class="btn btn-danger btn-xs">Disable</span>';
+				echo '<span class="btn btn-danger btn-xs camp-status">Stop</span>';
 			}
 		}
-		return '<span class="btn btn-danger btn-xs">Disable</span>';
 	}
 }
 

@@ -21,6 +21,9 @@ $route = [
 	'admin/campaign/email/edit'       => 	'Admin/campaign/email_edit',
 	'admin/campaign/email/delete'     => 	'Admin/campaign/email_delete',
 	'admin/campaign/email/ajax' 	  => 	'Admin/campaign/email_ajax',
+	//campaign tracker
+	'unsubscribe' 	  		  		  => 	'Admin/campaign/unsubscribe',
+	'tracker/(:any)' 	  		  	  => 	'Admin/campaign/tracker/$1',
 
 	/*
 	 * Router for campaign template 

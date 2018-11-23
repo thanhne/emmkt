@@ -1,0 +1,95 @@
+
+<div style="border:1px solid #dd4814;padding-left:20px;margin:10px 0;">
+
+	<h4>A PHP Error was encountered</h4>
+
+	<p>Severity: Warning</p>
+	<p>Message:  filesize(): stat failed for blank.gif</p>
+	<p>Filename: Admin/Campaign.php</p>
+	<p>Line Number: 35</p>
+
+	
+		<p>Backtrace:</p>
+		
+			
+		
+			
+		
+			
+		
+			
+				<p style="margin-left:10px">
+				File: D:\xampp\htdocs\bestpricevn\project\marketing_services\application\controllers\Admin\Campaign.php<br />
+				Line: 35<br />
+				Function: filesize				</p>
+
+			
+		
+			
+				<p style="margin-left:10px">
+				File: D:\xampp\htdocs\bestpricevn\project\marketing_services\application\controllers\Admin\Campaign.php<br />
+				Line: 20<br />
+				Function: opener				</p>
+
+			
+		
+			
+		
+			
+				<p style="margin-left:10px">
+				File: D:\xampp\htdocs\bestpricevn\project\marketing_services\index.php<br />
+				Line: 308<br />
+				Function: require_once				</p>
+
+			
+		
+	
+</div>
+
+<div style="border:1px solid #dd4814;padding-left:20px;margin:10px 0;">
+
+	<h4>A PHP Error was encountered</h4>
+
+	<p>Severity: Warning</p>
+	<p>Message:  readfile(https://www.formget.com/tutorial/php-email-tracker/blank.gif): failed to open stream: HTTP request failed! HTTP/1.1 404 Not Found
+</p>
+	<p>Filename: Admin/Campaign.php</p>
+	<p>Line Number: 45</p>
+
+	
+		<p>Backtrace:</p>
+		
+			
+		
+			
+		
+			
+		
+			
+				<p style="margin-left:10px">
+				File: D:\xampp\htdocs\bestpricevn\project\marketing_services\application\controllers\Admin\Campaign.php<br />
+				Line: 45<br />
+				Function: readfile				</p>
+
+			
+		
+			
+				<p style="margin-left:10px">
+				File: D:\xampp\htdocs\bestpricevn\project\marketing_services\application\controllers\Admin\Campaign.php<br />
+				Line: 20<br />
+				Function: opener				</p>
+
+			
+		
+			
+		
+			
+				<p style="margin-left:10px">
+				File: D:\xampp\htdocs\bestpricevn\project\marketing_services\index.php<br />
+				Line: 308<br />
+				Function: require_once				</p>
+
+			
+		
+	
+</div>

@@ -38,14 +38,30 @@ $(document).ready(function(){
 		});
 	});
 
+	$('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    })
+
 	$('#dataTables-example .start-stop .btn').click(function() {
-		var val = $(this).html();
-		var id = $(this).attr('camp_id');
+		var a = $(this);
+		var id = a.attr('camp_id');
 		var status;
-		if(val == 'Start') {
+		if(a.html() == 'Start') {
 			status = 2;
 		}else {
 			status = 1;
+		}
+
+		var camp_stt = $('.camp-status');
+		if (camp_stt.html() == 'Stop') {
+			camp_stt.removeClass('btn-danger');
+			camp_stt.addClass('btn-primary');
+			camp_stt.html('Sending..');	
+		}else {
+			camp_stt.removeClass('btn-primary');
+			camp_stt.addClass('btn-danger');
+			camp_stt.html('Stop');
 		}
 
 		$.ajax({
@@ -58,7 +74,19 @@ $(document).ready(function(){
 			},
 		})
 		.done(function(data) {
-			console.log(data);
+			if (data == 'updated') {
+				if (a.html() == 'Start') {
+					a.removeClass('btn-success');
+					a.addClass('btn-danger');
+					a.html('Stop');
+					a.attr('data-original-title','Click to Stop this campaign');
+				}else {
+					a.removeClass('btn-danger');
+					a.addClass('btn-success');
+					a.html('Start');
+					a.attr('data-original-title','Click to Start this campaign');
+				}
+			}
 		});
 	});
 })

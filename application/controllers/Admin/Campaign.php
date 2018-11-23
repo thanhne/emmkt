@@ -15,20 +15,122 @@ class Campaign extends CI_Controller {
 		$this->load->model('admin_model');
 	}
 
+	public function tracker($tracker) {
+		if($tracker) {
+			$output = decode_email($tracker);
+			if ($output) {
+				parse_str($output);
+				if ($tracker_type == 'opener') {
+					if ($email) {
+						$this->opener($email,$campaign_id,$contact_id);
+					}
+				}else if($tracker_type == 'clicker') {
+
+				}else {
+
+				}
+			}
+		
+			
+			/*echo $tracker_type;
+			echo '<Br />';
+			echo $email;
+			echo '<Br />';
+			echo $campaign_id;
+			echo '<br />';
+			echo $contact_id;*/
+		}else {
+
+		}
+
+		// /echo $tracker;
+		/*$input = 'tracker_type=opener&email=nbthanh93@gmail.com&campaign_id=1&contact_id=1';
+
+		$code = encode_email($input);
+
+		echo $code;*/
+
+		/*if ($tracker == 'op') {
+			$this->opener();
+		}else if($tracker == 'cli') {
+
+		}else {
+			redirect('404');
+		}*/
+	}
+
+	public function opener($email = '', $campaign_id = '', $contact_id = '') {
+		if ($email) {
+
+			//$this->admin_model->
+
+			$graphic_http = $this->config->item('base_url').'/vik/public/admin/assets/dist/blank.gif';
+
+			$filesize = filesize('blank.gif');
+
+			//Now actually output the image requested, while disregarding if the database was affected
+			header('Pragma: public');
+			header('Expires: 0');
+			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+			header('Cache-Control: private', false);
+			header('Content-Disposition: attachment; filename="blank.gif"');
+			header('Content-Transfer-Encoding: binary');
+			header('Content-Length: ' . $filesize);
+			readfile($graphic_http);
+			exit;
+		}else {
+			redirect('404');
+		}
+	}
+
+	public function clicker() {
+
+	}
+
+	public function unsubscribe() {
+		$data = [
+			'meta'		=> [ //Meta title, descripton...
+				'title' => 'Hủy đăng ký khỏi các danh sách BestPrice',
+			],
+		];
+
+		if (!$email = $this->input->get('email')) {
+			redirect('404');
+		}
+
+		$data['unsub_url'] = '/unsubscribe/?status=true&email='.$email;
+
+		$data['skip'] = 'https://www.google.com.vn';
+
+		$status = $this->input->get('status');
+		$email = decode_email($email);
+		if ($status == 'true') {
+			if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+				if ($item = $this->admin_model->contact_find_byEmail($email)) {
+					$this->admin_model->contact_delete($item[0]['id']);
+					$this->load->view( AD_THEME.'/tracker/unsubscribe_success', $data);
+				}else {
+					$this->load->view( AD_THEME.'/tracker/unsubscribe_success', $data);
+				}
+			}
+		}else {
+			if (!$this->admin_model->contact_find_byEmail($email)) {
+				redirect('404');
+			}
+			$data['email'] = $email;
+			$this->load->view( AD_THEME.'/tracker/unsubscribe', $data);
+		}
+	}
+
 	public function email_ajax() {
 		if ($this->input->post('run_campaign')) {
 			$id    	= $this->input->post('campaign_id');
 			$status = $this->input->post('status');
-
 			if (is_numeric($id)) {
 				$status = $this->input->post('status');
 				if ($this->admin_model->campaign_update_status($id,$status)) {
-					return true;
-				}else {
-					return false;
+					echo 'updated';
 				}
-			}else {
-				return false;
 			}
 		}
 	}

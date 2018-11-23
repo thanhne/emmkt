@@ -275,8 +275,12 @@ class Admin_model extends CI_Model{
 	 */
 	public function contact_get_mail($id = ''){
 		if (!empty($id)) {
+			$result = [];
 			if ($item = $this->contact_find($id)) {
-				return $item['email'];
+				return [
+					'first_name' => $item['first_name'],
+					'email' => $item['email']
+				];
 			}
 			return false;
 		}
@@ -292,6 +296,17 @@ class Admin_model extends CI_Model{
 			$this->db->from('contacts');
 			$this->db->where('id',$id);
 			return $this->db->get()->result_array()[0];
+		}
+		return false;
+	}
+	public function contact_find_byEmail($email = "") {
+		if (!empty($email)) {
+			$this->db->from('contacts');
+			$this->db->where('email',$email);
+			if ($item = $this->db->get()) {
+				return $item->result_array();
+			}
+			return false;
 		}
 		return false;
 	}
@@ -617,23 +632,6 @@ class Admin_model extends CI_Model{
 	 * @param  array  $group_ids [id1,id2,id3]
 	 * @return [type]            [description]
 	 */
-	/*public function relationships_find_contact_bygroup($group_ids = []) {
-		if (is_array($group_ids)) {
-			$this->db->from('relationships');
-			$this->db->where_in('group_id', $group_ids);
-
-			$outputs = [];
-			foreach ($this->db->get()->result_array() as $item) {
-				if ($item['contact_id']) {
-					$outputs[] = $item['contact_id'];
-				}
-			}
-
-			return $outputs;
-		}
-		return false;
-	}*/
-
 	public function relationships_find_contact_bygroup($group_ids = [],$limit = '') {
 		if (is_array($group_ids)) {
 			$this->db->from('relationships');
@@ -655,11 +653,6 @@ class Admin_model extends CI_Model{
 			return $outputs;
 		}
 		return false;
-		/*$this->db->select('*');
-		$this->db->from('blogs');
-		$this->db->join('comments', 'comments.id = blogs.id');
-
-		$query = $this->db->get();*/
 	}
 	/**
 	 * [relationships_find_group_bycamp get all group have camp_id = '']
@@ -738,7 +731,7 @@ class Admin_model extends CI_Model{
 		$this->db->from('transactions');
 		$this->db->where('camp_id',$camp_id);
 		$this->db->where('contact_id',$contact_id);
-		$this->db->where('st_received',1);
+		$this->db->where_in('st_received',[1,2]);
 		if($result = $this->db->get()->result_array()){
 			return $result;
 		}

@@ -13,7 +13,7 @@ class Sendmail{
 	}
 
 	public function mailConfig($config_input = []) {
-		$config = [
+		$default = [
 		 	'protocol'  => 'smtp',
 		    'smtp_host' => 'ssl://smtp.gmail.com',
 		    'smtp_port' => 465,
@@ -21,12 +21,12 @@ class Sendmail{
 		    'smtp_pass' => '',
 		    'mailtype'  => 'html',
 		    'charset'   => 'utf-8',
-		    'smtp_timeout'	=> $timeout
+		    'smtp_timeout'	=> 30
 		];
 
-		$output = array_merge($config,$config_input);
+		$config = array_merge($default,$config_input);
 
-		if (count($output) != 8 ) {
+		if (count($config) != 8 ) {
 			return false;
 		}
 
@@ -48,16 +48,7 @@ class Sendmail{
 		return false;
 	}
 
-	public function setStatus() {
-		if ($this->Sender()) {
-			return true;
-		}
-		return false;
-	}
-
 	public function Sender () {
-		$this->mailConfig();
-
 		$this->CI->email->from($this->mailFrom,$this->mailName);
 		$this->CI->email->to($this->mailTo);
 		$this->CI->email->subject($this->mailSubject);
@@ -65,6 +56,14 @@ class Sendmail{
 		if (!empty($this->mailreplyTo)) {
 			$this->CI->email->reply_to($this->mailreplyTo, $this->mailName);
 		}
-		return $this->CI->email->send();
+		if ($this->CI->email->send()) {
+			return true;
+		}
+		return false;
+	}
+
+	public function is_errors() {
+		print_r($this->CI->email->print_debugger());
+		die();
 	}
 }
